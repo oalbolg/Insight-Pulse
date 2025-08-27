@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insight Pulse</title>
+    <meta name="robots" content="index, follow" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .logo:hover {
+        color: #e0e7ff;
+      }
+      .logo-icon {
+        width: 2rem;
+        height: 2rem;
+        fill: currentColor;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white shadow-lg">
+      <div
+        class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center"
+      >
+        <a href="/index.html" class="logo">
+          <!-- Placeholder SVG logo icon -->
+          <svg
+            class="logo-icon"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7v10l10 5 10-5V7l-10-5zm0 2.83l6.67 3.33v6.67L12 18.17l-6.67-3.34V8.16L12 4.83z"
+            />
+          </svg>
+          Insight Pulse
+        </a>
+        <nav class="mt-4 md:mt-0">
+          <ul class="flex space-x-6">
+            <li>
+              <a href="/index.html" class="hover:text-indigo-200 transition">Home</a>
+            </li>
+            <li>
+              <a href="#about" class="hover:text-indigo-200 transition"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="#blog" class="hover:text-indigo-200 transition">Blog</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-indigo-600 text-white py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-4">
+          Dynamic Ideas for a Changing World
+        </h2>
+        <p class="text-lg mb-8">
+          Dive into engaging articles on technology, science, and innovation.
+        </p>
+        <a
+          href="#blog"
+          class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition"
+          >Read Latest Posts</a
+        >
+      </div>
+    </section>
+
+    <!-- Main Content: Blog Section -->
+    <main id="blog" class="container mx-auto px-4 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Blog Posts -->
+        <div class="col-span-full" id="posts-container">
+          <!-- Posts will be dynamically rendered here -->
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="mt-12 flex justify-center space-x-4" id="pagination">
+        <!-- Pagination buttons will be dynamically added here -->
+      </div>
+    </main>
+
+    <!-- About Section -->
+    <section id="about" class="bg-gray-200 py-12">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8">About Insight Pulse</h2>
+        <p class="text-lg text-center max-w-2xl mx-auto">
+          Insight Pulse is a leading blog dedicated to delivering fresh
+          perspectives on technology, science, and more. Our goal is to spark
+          curiosity and provide well-researched content for our readers.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-800 text-white py-6">
+      <div class="container mx-auto px-4 text-center">
+        <p>&copy; 2025 Insight Pulse. All rights reserved.</p>
+        <div class="mt-4 flex justify-center space-x-4">
+          <a href="#" class="hover:text-indigo-300">Twitter</a>
+          <a href="#" class="hover:text-indigo-300">LinkedIn</a>
+          <a href="#" class="hover:text-indigo-300">Instagram</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Sample blog posts data (dynamic content)
+      const posts = [
+        {
+          title: "Schauspielschule für Performing Arts in der Schweiz",
+          excerpt:
+            "Die Stage Academy Switzerland ist eine renommierte Bildungseinrichtung, die sich auf die umfassende Ausbildung in den darstellenden Künsten spezialisiert hat. Mit einem starken Schwerpunkt auf Tanz, Gesang und Schauspiel bietet die Akademie ein abwechslungsreiches und intensives Lehrprogramm",
+          date: "August 27, 2025",
+          category: "General",
+          url: "/schauspielschule-fur-performing-arts-schweiz.html",
+        },
+      ];
+
+      // Pagination settings
+      const postsPerPage = 6;
+      let currentPage = 1;
+
+      // Function to render posts
+      function renderPosts(filteredPosts = posts) {
+        const container = document.getElementById("posts-container");
+        container.innerHTML = "";
+
+        const start = (currentPage - 1) * postsPerPage;
+        const end = start + postsPerPage;
+        const paginatedPosts = filteredPosts.slice(start, end);
+
+        // Create a grid container for posts
+        const gridContainer = document.createElement("div");
+        gridContainer.className =
+          "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8";
+
+        paginatedPosts.forEach((post) => {
+          const postElement = document.createElement("article");
+          postElement.className =
+            "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition";
+          postElement.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-2">${post.title}</h3>
+                    <p class="text-gray-600 mb-4">${post.excerpt}</p>
+                    <div class="text-sm text-gray-500">
+                        <span>${post.date}</span>
+                    </div>
+                    <a href="${post.url}" class="mt-4 inline-block text-indigo-600 font-semibold hover:underline">Read More &rarr;</a>
+                `;
+          gridContainer.appendChild(postElement);
+        });
+
+        container.appendChild(gridContainer);
+        renderPagination(filteredPosts.length);
+      }
+
+      // Function to render pagination
+      function renderPagination(totalPosts) {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+        const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.textContent = i;
+          button.className = `px-4 py-2 rounded-md ${
+            i === currentPage
+              ? "bg-indigo-600 text-white"
+              : "bg-white text-indigo-600 border border-indigo-600"
+          } hover:bg-indigo-500 hover:text-white transition`;
+          button.addEventListener("click", () => {
+            currentPage = i;
+            renderPosts(getFilteredPosts());
+          });
+          pagination.appendChild(button);
+        }
+      }
+
+      // Search functionality (optional, retained from previous but not displayed in UI)
+      let filteredPosts = posts;
+      function getFilteredPosts() {
+        return filteredPosts;
+      }
+
+      // Initial render
+      renderPosts();
+
+      // Smooth scrolling for nav links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
